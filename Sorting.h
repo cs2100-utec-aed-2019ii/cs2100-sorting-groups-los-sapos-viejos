@@ -26,9 +26,30 @@ public:
 
     // Algoritmos de Ordenamiento
 
-    void insertion_sort() {}
+    void insertion_sort(){}
     void selection_sort() {}
-    void bubble_sort() {}
+
+    void bubble_sort() {
+
+            for(int i=0;i<lista.size;i++){
+
+                for(int j=0;j<lista.size-i-1;j++){
+
+                    if(lista[j]>lista[j+1]){
+
+                        T temp=lista[j];
+
+                        arr[j]=arr[j+1];
+
+                        arr[j+1]=temp;
+                    }
+                }
+            }
+        }
+
+
+    }
+
     void merge_sort() {}
     void heap_sort() {}
     void quick_sort() {}
@@ -36,8 +57,8 @@ public:
     // Extras
 
     void shell_sort() {}
-
 };
+
 
 
 #endif //SORTINGCLASS_SORTING_H
