@@ -1,10 +1,6 @@
 #include <iostream>
 
-#include "Sorting.h"
-
-int main() {
-
-
-
-    return 0;
+int main (int, char * []){
+    std::cout << "Hello World" << std::endl;
+    return 1;
 }
