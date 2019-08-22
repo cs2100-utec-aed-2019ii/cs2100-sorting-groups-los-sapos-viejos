@@ -104,7 +104,41 @@ public:
             heapify(i, 0);
         }
     }
-    void quick_sort() {}
+
+
+    /// Quick Sort
+
+    void swap(int* a, int* b){
+        int t = *a;
+        *a = *b;
+        *b = t;
+    }
+
+    int get_size(){
+        return lista.size();
+    }
+
+    int partition (int low, int high){
+        int pivot = lista[high];
+        int i = (low - 1);
+
+        for (int j = low; j <= high - 1; j++){
+            if (lista[j] <= pivot){
+                i++;
+                swap(&lista[i], &lista[j]);
+            }
+        }
+        swap(&lista[i + 1], &lista[high]);
+        return (i + 1);
+    }
+    // low = 0 y high = lista.get_size()
+    void quick_sort(int low, int high){
+        if (low < high) {
+            int part = partition(low, high);
+            quick_sort(low, part - 1);
+            quick_sort(part + 1, high);
+        }
+    }
 
     // Extras
 
