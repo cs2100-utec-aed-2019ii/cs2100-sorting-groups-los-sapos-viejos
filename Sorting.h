@@ -76,7 +76,34 @@ public:
     }
 
     void merge_sort() {}
-    void heap_sort() {}
+
+    ///Heapsort
+    void heapify(int n, int i) {
+        int largest = i;
+        int left = 2*i + 1;
+        int right = 2*i + 2;
+
+        if (left < n && lista[left] > lista[largest])
+            largest = left;
+
+        if (right < n && lista[right] > lista[largest])
+            largest = right;
+
+        if (largest != i) {
+            std::swap(lista[i], lista[largest]);
+            heapify(n, largest);
+        }
+    }
+
+    void heap_sort() {
+        for (int i = lista.size() / 2 - 1; i >= 0; i--)
+            heapify(lista.size(), i);
+
+        for (int i=lista.size()-1; i>=0; i--){
+            std::swap(lista[0], lista[i]);
+            heapify(i, 0);
+        }
+    }
     void quick_sort() {}
 
     // Extras
