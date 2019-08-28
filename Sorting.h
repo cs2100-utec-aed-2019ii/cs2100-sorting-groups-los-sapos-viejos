@@ -71,8 +71,8 @@ public:
     }
 
     void bubble_sort() {
-        for (int i = 0; i < lista.size; i++) {
-            for (int j = 0; j < lista.size-i-1; j++) {
+        for (int i = 0; i < lista.size(); i++) {
+            for (int j = 0; j < lista.size()-i-1; j++) {
                 if (lista[j] > lista[j+1]) {
                     T temp = lista[j];
                     lista[j] = lista[j+1];
@@ -194,7 +194,7 @@ public:
         swap(&lista[i + 1], &lista[high]);
         return (i + 1);
     }
-    // low = 0 y high = lista.get_size()
+    // low = 0 y high = lista.get_size()-1
     void quick_sort(int low, int high){
         if (low < high) {
             int part = partition(low, high);
