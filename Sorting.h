@@ -1,4 +1,5 @@
 
+
 //
 // Created by Gabriel Spranger Rojas on 2019-08-21.
 //
@@ -36,7 +37,7 @@ public:
 
     void print_lista(){
         for(auto x : lista)
-            std::cout<<x<<std::endl;
+            std::cout<<x<<" ";
     }
 
     // Algoritmos de Ordenamiento
@@ -71,8 +72,8 @@ public:
     }
 
     void bubble_sort() {
-        for (int i = 0; i < lista.size; i++) {
-            for (int j = 0; j < lista.size-i-1; j++) {
+        for (int i = 0; i < lista.size(); i++) {
+            for (int j = 0; j < lista.size()-i-1; j++) {
                 if (lista[j] > lista[j+1]) {
                     T temp = lista[j];
                     lista[j] = lista[j+1];
