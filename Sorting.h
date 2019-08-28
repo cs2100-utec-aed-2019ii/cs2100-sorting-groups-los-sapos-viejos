@@ -1,5 +1,4 @@
 
-
 //
 // Created by Gabriel Spranger Rojas on 2019-08-21.
 //
@@ -37,7 +36,7 @@ public:
 
     void print_lista(){
         for(auto x : lista)
-            std::cout<<x<<" ";
+            std::cout<<x<<std::endl;
     }
 
     // Algoritmos de Ordenamiento
@@ -72,8 +71,8 @@ public:
     }
 
     void bubble_sort() {
-        for (int i = 0; i < lista.size(); i++) {
-            for (int j = 0; j < lista.size()-i-1; j++) {
+        for (int i = 0; i < lista.size; i++) {
+            for (int j = 0; j < lista.size-i-1; j++) {
                 if (lista[j] > lista[j+1]) {
                     T temp = lista[j];
                     lista[j] = lista[j+1];
@@ -85,60 +84,58 @@ public:
 
 
 
-    void merge(std::vector <T>& v, int liminf, int mid, int limsup) {
-        int aux1 = mid - liminf + 1;
+    void merge(std::vector<T> &arr, int liminf, int mid, int limsup)
+    {
+        int i, j, k;
+        int n1 = mid - liminf + 1;
+        int n2 = limsup - mid;
+        std::vector<T> L;
+        std::vector<T> R;
+        for (i = 0; i < n2; i++)
+            R.push_back(0);
+        for (i = 0; i < n1; i++)
+            L.push_back(0);
+        for (i = 0; i < n1; i++)
+            L[i] = arr[liminf + i];
+        for (j = 0; j < n2; j++)
+            R[j] = arr[mid + 1+ j];
 
-        int aux2 =  limsup - mid;
-
-        std::vector <T> temp1(aux1);
-
-        std::vector <T> temp2(aux2);
-
-        for (int i = 0; i < aux1; i++) {
-            temp1[i] = v[liminf + i];
-        }
-
-        for (int i = 0; i < aux2; i++) {
-            temp2[i] = v[mid + i + 1];
-        }
-
-        int cont1 = 0;
-
-        int cont2 = 0;
-
-        int cont3 = liminf;
-
-        while (cont1 < aux1 && cont2 < aux2) {
-            if (temp1[cont1] < temp2[cont2]) {
-                v[cont2] = temp1[cont1];
-                cont1++;
+        i = 0;
+        j = 0;
+        k = liminf;
+        while (i < n1 && j < n2)
+        {
+            if (L[i] <= R[j]){
+                arr[k] = L[i];
+                i++;
             }
-            else {
-                v[cont3] = temp2[cont2];
-                cont2++;
+            else{
+                arr[k] = R[j];
+                j++;
             }
-            cont3++;
+            k++;
         }
-
-        while (cont1 < aux1) {
-            v[cont3] = temp1[cont1];
-            cont1++;
-            cont3++;
+        while (i < n1){
+            arr[k] = L[i];
+            i++;
+            k++;
         }
-        while (cont2 < aux2) {
-            v[cont3] = temp2[cont2];
-            cont2++;
-            cont3++;
+        while (j < n2){
+            arr[k] = R[j];
+            j++;
+            k++;
         }
-
     }
 
-    void merge_sort(std::vector <T> &v, int liminf, int limsup) {
-        if (liminf < limsup) {
-            int mid = (liminf + (limsup - 1)) / 2;
-            merge_sort(lista, liminf, mid);
-            merge_sort(lista, mid + 1, limsup);
-            merge(lista, liminf, mid,limsup);
+
+    void merge_sort(std::vector<T> &arr, int liminf, int limsup) //lista, 0 y size
+    {
+        if (liminf < limsup)
+        {
+            int mid = liminf+(limsup-liminf)/2;
+            merge_sort(arr, liminf, mid);
+            merge_sort(arr, mid+1, limsup);
+            merge(arr, liminf, mid, limsup);
         }
     }
 
@@ -209,21 +206,21 @@ public:
     // Extras
 
     void shell_sort() {
-            int n=lista.size();
-            for (int gap = n/2; gap > 0; gap /= 2)
+        int n=lista.size();
+        for (int gap = n/2; gap > 0; gap /= 2)
+        {
+            for (int i = gap; i < n; i += 1)
             {
-                for (int i = gap; i < n; i += 1)
-                {
-                    int temp = lista[i];
+                int temp = lista[i];
 
-                    int j;
-                    for (j = i; j >= gap && lista[j - gap] > temp; j -= gap)
-                        lista[j] = lista[j - gap];
-                    lista[j] = temp;
-                }
+                int j;
+                for (j = i; j >= gap && lista[j - gap] > temp; j -= gap)
+                    lista[j] = lista[j - gap];
+                lista[j] = temp;
             }
-
         }
+
+    }
 
 };
 
