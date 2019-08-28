@@ -1,3 +1,4 @@
+
 //
 // Created by Gabriel Spranger Rojas on 2019-08-21.
 //
@@ -23,6 +24,7 @@ class Sorting {
 public:
 
     // Lista
+    Sorting() {}
 
     std::vector<T>& get_lista() {
         return lista;
@@ -30,6 +32,11 @@ public:
 
     void set_lista(std::vector<T>& new_lista) {
         lista = new_lista;
+    }
+
+    void print_lista(){
+        for(auto x : lista)
+            std::cout<<x<<std::endl;
     }
 
     // Algoritmos de Ordenamiento
@@ -75,13 +82,71 @@ public:
         }
     }
 
-    void merge_sort() {}
+
+
+    void merge(std::vector <T>& v, int liminf, int mid, int limsup) {
+        int aux1 = mid - liminf + 1;
+
+        int aux2 =  limsup - mid;
+
+        std::vector <T> temp1(aux1);
+
+        std::vector <T> temp2(aux2);
+
+        for (int i = 0; i < aux1; i++) {
+            temp1[i] = v[liminf + i];
+        }
+
+        for (int i = 0; i < aux2; i++) {
+            temp2[i] = v[mid + i + 1];
+        }
+
+        int cont1 = 0;
+
+        int cont2 = 0;
+
+        int cont3 = liminf;
+
+        while (cont1 < aux1 && cont2 < aux2) {
+            if (temp1[cont1] < temp2[cont2]) {
+                v[cont2] = temp1[cont1];
+                cont1++;
+            }
+            else {
+                v[cont3] = temp2[cont2];
+                cont2++;
+            }
+            cont3++;
+        }
+
+        while (cont1 < aux1) {
+            v[cont3] = temp1[cont1];
+            cont1++;
+            cont3++;
+        }
+        while (cont2 < aux2) {
+            v[cont3] = temp2[cont2];
+            cont2++;
+            cont3++;
+        }
+
+    }
+
+    void merge_sort(std::vector <T> &v, int liminf, int limsup) {
+        if (liminf < limsup) {
+            int mid = (liminf + (limsup - 1)) / 2;
+            merge_sort(lista, liminf, mid);
+            merge_sort(lista, mid + 1, limsup);
+            merge(lista, liminf, mid,limsup);
+        }
+    }
+
 
     ///Heapsort
-    void heapify(int n, int i) {
-        int largest = i;
-        int left = 2*i + 1;
-        int right = 2*i + 2;
+    void heapify(T n, T i) {
+        T largest = i;
+        T left = 2*i + 1;
+        T right = 2*i + 2;
 
         if (left < n && lista[left] > lista[largest])
             largest = left;
@@ -142,7 +207,22 @@ public:
 
     // Extras
 
-    void shell_sort() {}
+    void shell_sort() {
+            int n=lista.size();
+            for (int gap = n/2; gap > 0; gap /= 2)
+            {
+                for (int i = gap; i < n; i += 1)
+                {
+                    int temp = lista[i];
+
+                    int j;
+                    for (j = i; j >= gap && lista[j - gap] > temp; j -= gap)
+                        lista[j] = lista[j - gap];
+                    lista[j] = temp;
+                }
+            }
+
+        }
 
 };
 
